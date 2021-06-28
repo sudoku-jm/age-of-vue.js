@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>router</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <!-- 라우터에서 페이지 이동을 하기 위한 링크 태그. -->
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+        </div>
+        <!-- vue인스턴스 + 라우터 인스턴스 연결해야 보인다. -->
+        <router-view></router-view>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+
+        var LoginComponent = {
+            template : '<div>login</div>'
+        }
+
+        var MainComponent = {
+            template : '<div>main</div>'
+        }
+
+       var router = new VueRouter({
+            mode : 'history',
+            //페이지의 라우팅 정보 :어떤 url 연결했을 때 어떤 페이지를 뿌려줄지?
+            // 배열이 들어가고 페이지 객페만큼 routes라우츠 객체도 늘어남.
+            routes : [
+                //로그인 페이지 정보
+                {
+                    //페이지 url
+                    path : '/login',
+                    // 해당 url에서 표시될 컴포넌트
+                    component : LoginComponent
+                },
+                // 메인 페이지 정보
+                {
+                   // url은 main 
+                   path : '/main',
+                   // 컴포넌트 이름은 MainComponent
+                   component : MainComponent
+                }
+            ]
+
+        });
+
+        new Vue({
+            el : '#app',
+            //router라는 속성에 vueRouter 인스턴스 연결.
+            router : router,
+        });
+
+    </script>
+</body>
+</html>
